@@ -233,10 +233,10 @@ main(void)
 	char *status;
 	char *avgs;
 	char *bat1;
-	char *tmar;
-	char *tmutc;
+//	char *tmar;
+//	char *tmutc;
 	char *tmbln;
-	char *t0, *t1;
+	char *t0; //*t1;
 	char *netstats;
 	static unsigned long long int rec, sent;
 
@@ -250,19 +250,19 @@ main(void)
 		avgs = loadavg();
 		bat1 = getbattery("/sys/class/power_supply/BAT1");
 		t0 = gettemperature("/sys/devices/virtual/thermal/thermal_zone0/hwmon0", "temp1_input");
-		tmar = mktimes("%H:%M", tzargentina);
-		tmutc = mktimes("%H:%M", tzutc);
-		tmbln = mktimes("KW %W %a %d %b %H:%M %Z %Y", tzberlin);
+//		tmar = mktimes("%H:%M", tzargentina);
+//		tmutc = mktimes("%H:%M", tzutc);
+		tmbln = mktimes("%a %d %b %H:%M %Z %Y", tzberlin);
 		netstats = get_netusage(&rec, &sent);
 
-		status = smprintf("T: %s B: %s L: %s N: %s A: %s U: %s %s",
-				t0, bat1, avgs, netstats, tmar, tmutc, tmbln);
+		status = smprintf("T: %s B: %s L: %s N: %s %s",
+				t0, bat1, avgs, netstats, tmbln);
 		setstatus(status);
 		free(t0);
 		free(bat1);
 		free(avgs);
-		free(tmar);
-		free(tmutc);
+//		free(tmar);
+//		free(tmutc);
 		free(tmbln);
 		free(status);
 	}
