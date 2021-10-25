@@ -1,2 +1,4 @@
 # Suckless
-Suckless DWM
+My Suckless DWM
+
+- Configuration DWM
