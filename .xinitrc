@@ -11,5 +11,8 @@ compton -b &
 #	dwm >/dev/null 2>&1 
 #done
 
+# Active NumLock
+numlockx &
+
 #Window manager
 exec dwm
