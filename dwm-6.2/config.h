@@ -51,6 +51,7 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+#include <X11/XF86keysym.h>
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -62,6 +63,8 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *slock[] = { "slock", NULL };
 static const char *screenshot[]  = { "flameshot", "gui", NULL };
 static const char *x11capture[]  = { "x11capture", NULL };
+static const char *volumedown[]       = { "amixer", "-q", "set", "Master", "2%-", "unmute", NULL };
+static const char *volumeup[]         = { "amixer", "-q", "set", "Master", "2%+", "unmute", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -91,6 +94,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_e,      spawn,          {.v = screenshot } },
 	{ MODKEY,                       XK_Print,  spawn,          {.v = x11capture } },
+	{ 0,                       	XF86XK_AudioLowerVolume,   spawn,          {.v = volumedown}},
+	{ 0,                       	XF86XK_AudioRaiseVolume,   spawn,          {.v = volumeup}},
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
